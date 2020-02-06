@@ -1,0 +1,17 @@
+---
+
+workdir: /tmp/agora
+
+files:
+  -
+    src: /html/config/config-dist.php
+    dest: /html/config/config.php
+  -
+    src: /html/config/.htaccess-dist
+    dest: /html/config/.htaccess
+  -
+    src: /html/config/config-restricted-dist.php
+    dest: /html/config/config-restricted.php
+  -
+    src: /html/config/sync-config-dist.sh
+    dest: /html/config/sync-config.sh

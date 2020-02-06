@@ -1,3 +1,4 @@
-# role-agora
+## Purpose
 
-Ansible role agora
+This ansible role contains general tasks to download and install Agora from github.
+
