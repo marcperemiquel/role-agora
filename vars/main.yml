@@ -4,9 +4,6 @@ workdir: /tmp/agora
 
 files:
   -
-    src: /html/config/config-dist.php
-    dest: /html/config/config.php
-  -
     src: /html/config/.htaccess-dist
     dest: /html/config/.htaccess
   -

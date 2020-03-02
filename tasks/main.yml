@@ -3,6 +3,7 @@
 # Clone Agora git repo 
 - git: 
     repo: https://github.com/projectestac/agora.git
+    version: aws
     dest: "{{ workdir }}"
     track_submodules: true
   tags: 
