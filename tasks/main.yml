@@ -1,12 +1,12 @@
 ---
 
-# Clone Agora git repo 
-- git: 
+# Clone Agora git repo
+- git:
     repo: https://github.com/projectestac/agora.git
     version: aws
     dest: "{{ workdir }}"
     track_submodules: true
-  tags: 
+  tags:
     - common
 
 - name: Copy multiple config files
@@ -14,18 +14,39 @@
     src: "{{ workdir }}{{ item.src }}"
     dest: "{{ workdir }}{{ item.dest }}"
     remote_src: yes
-  with_items: 
+  with_items:
     - "{{ files }}"
-  tags: 
+  tags:
     - common
+
+- name: Copy specific config files
+  copy:
+    src: "{{ workdir }}{{ item.src }}"
+    dest: "{{ workdir }}{{ item.dest }}"
+    remote_src: yes
+  with_items:
+    -
+      src: "{{ workdir }}/html/wordpress/.htaccess-dist"
+      dest: "{{ workdir }}/html/wordpress/.htaccess"
+  tags: [wordpress, portal]
 
 - name: Change permissions wordpress htaccess
   file:
     path: "{{ workdir }}/html/wordpress/.htaccess"
     state: touch
     mode: 440
-  tags:
-    - wordpress
+  tags: [wordpress, portal]
+
+- name: Copy encripted key
+  copy:
+    src: "{{ workdir }}{{ item.src }}"
+    dest: "{{ workdir }}{{ item.dest }}"
+    remote_src: yes
+  with_items:
+    -
+      src: "{{ workdir }}/html/config/config-restricted-dist.php"
+      dest: "{{ workdir }}/html/config/config-restricted.php"
+  tags: [wordpress, moodle]
 
 # Remove unused folders
 - name: Recursively remove directory moodle2
@@ -52,7 +73,7 @@
     src: "{{ workdir }}/html/"
     dest: /dades/html/
     remote_src: yes
-  tags: 
+  tags:
     - common
 
 # Recursively change ownership of /dades
@@ -63,7 +84,7 @@
     recurse: yes
     owner: www-data
     group: www-data
-  tags: 
+  tags:
     - common
 
 # Clean tmp
@@ -71,5 +92,5 @@
   file:
     path: "{{ workdir }}"
     state: absent
-  tags: 
+  tags:
     - common
