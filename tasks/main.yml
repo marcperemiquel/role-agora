@@ -37,17 +37,6 @@
     mode: 440
   tags: [wordpress, portal]
 
-- name: Copy encripted key
-  copy:
-    src: "{{ workdir }}{{ item.src }}"
-    dest: "{{ workdir }}{{ item.dest }}"
-    remote_src: yes
-  with_items:
-    -
-      src: "{{ workdir }}/html/config/config-restricted-dist.php"
-      dest: "{{ workdir }}/html/config/config-restricted.php"
-  tags: [wordpress, moodle]
-
 # Remove unused folders
 - name: Recursively remove directory moodle2
   file:
