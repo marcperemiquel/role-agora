@@ -16,6 +16,7 @@
     remote_src: yes
   with_items:
     - "{{ files }}"
+  ignore_errors: yes
   tags:
     - common
 
@@ -28,6 +29,7 @@
     -
       src: "{{ workdir }}/html/wordpress/.htaccess-dist"
       dest: "{{ workdir }}/html/wordpress/.htaccess"
+  ignore_errors: yes
   tags: [wordpress, portal]
 
 - name: Change permissions wordpress htaccess
@@ -35,6 +37,7 @@
     path: "{{ workdir }}/html/wordpress/.htaccess"
     state: touch
     mode: 440
+  ignore_errors: yes
   tags: [wordpress, portal]
 
 # Remove unused folders
